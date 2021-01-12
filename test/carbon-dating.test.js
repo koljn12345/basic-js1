@@ -14,9 +14,7 @@ describe('Carbon dating', () => {
         expect(dateSample).exist;
       });
   });
-
   //Specific requirements
-
   describe('base requirements', () => {
     it.optional('should return false on wrong type', () => {
       assert.equal(dateSample(3), false);
