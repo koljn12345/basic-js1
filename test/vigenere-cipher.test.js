@@ -71,17 +71,7 @@ describe('Vigenere cipher', () => {
                 assert.equal(directMachine.decrypt(encrypted, testKey), testStr);
             }
         });
-        {
-          // const testStr = createTestString(3);
-          // console.log(testStr);
-          //       const reversedTestStr = testStr.split('').reverse().join('');
-          //       console.log(reversedTestStr);
-          //       const testKey = createTestKey(3 - 3 % 2);
-          //       console.log(testKey);
-          //       const encrypted = reverseMachine.encrypt(reversedTestStr, testKey);
-          //       console.log(encrypted);
-                // const reversedEncrypted = encrypted.split('').reverse().join('');
-        }
+        
         it.optional('double-sided reverse cryptography 2', () => {
             for (let i = 2; i < 200; i += 1) {
                 const testStr = createTestString(i);
