@@ -1,29 +1,15 @@
 module.exports = function transform(arr) {
-    if(!Array.isArray(arr)) throw new Error('hj');
-    for(let i=0; i<arr.length; i++) {
-        switch (arr[i]) {
-            case '--double-next':
-                i==arr.length-1 ? arr.splice(i,1) : arr.splice(i,1,arr[i+1]);
-                break; 
-            case '--double-prev':
-                i==0 ? arr.splice(i,1): arr.splice(i,1,arr[i-1]);
-                i==0 ? i--: i;
-                break;     
-            default:
-                break;
+    if(!Array.isArray(arr)) throw new Error();
+      let res=[];
+        for(let i=0; i<arr.length; i++) {
+            arr[i]== '--discard-next' ? i++ : 
+                arr[i] == '--discard-prev' ? 
+                    (res.length !=0 ? arr[i-2] != '--discard-next' ? res.pop() : 0:0) :
+                        arr[i] == '--double-next' ? res.push(arr[i+1]) :
+                            arr[i] == '--double-prev' ?  
+                                (i!=0 ? arr[i-2] != '--discard-next' ? res.push(arr[i-1]) : 0:0) : 
+                                res.push(arr[i])
+
         }
-    }
-    for(let i=0; i<arr.length; i++) {
-        switch (arr[i]) {
-            case '--discard-next':
-                i==arr.length ? arr.splice(i,1): arr.splice(i,2);
-                i-=2;
-                break;
-            case '--discard-prev':
-                i==0 ? arr.splice(i,1) : arr.splice(i-1,2);
-                i==0 ? i--: i-=2;
-                break;            
-        }
-    }
-    return arr;
+    return res.filter((el)=> el!=undefined);
 };
