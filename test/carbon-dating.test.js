@@ -1,11 +1,11 @@
-const chai = require('chai');
-const { expect, assert } = chai;
-it.optional = require('../extensions/it-optional');
+const { expect, assert } = require('chai');
+const { testOptional } = require('../extensions/index.js');
+const { dateSample } = require('../src/carbon-dating.js');
 
+it.optional = testOptional;
+
+Object.freeze(expect);
 Object.freeze(assert);
-
-const dateSample = require('../src/carbon-dating.js');
-
 
 describe('Carbon dating', () => {
   // Presence requirement
@@ -15,7 +15,9 @@ describe('Carbon dating', () => {
       expect(dateSample).to.be.instanceOf(Function);
     });
   });
+
   //Specific requirements
+
   describe('base requirements', () => {
     it.optional('should return false on wrong type', () => {
       assert.equal(dateSample(3), false);
@@ -43,8 +45,12 @@ describe('Carbon dating', () => {
 
   describe('functional requirements ', () => {
 
-    it.optional('passes simpliest check and determines correct tests', () => {
-      const isLogCalculated = dateSample('1') === 22387 ? true : false;
+    describe('passes simpliest check and determines correct tests', () => {
+
+      let isLogCalculated = false;
+      try {
+        isLogCalculated = dateSample('1') === 22387;
+      } catch (e) { }
 
       if (isLogCalculated) {
         it.optional('basic examples', () => {
