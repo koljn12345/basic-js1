@@ -1,3 +1,9 @@
+const { NotImplementedError } = require('../extensions/index.js');
+
+/**
+ * Implement chainMaker object according to task description
+ * 
+ */
 const chainMaker = {
   str: '',
   getLength() {
@@ -11,7 +17,7 @@ const chainMaker = {
     let length= this.getLength();
     if(position> length || position<=0 || typeof position !='number')  {
       this.str='';
-      throw 'Not implemented' }
+      throw new Error("You can't remove incorrect link!") }
     else
     {this.str= this.str.split('~~').slice(0,-1);
     this.str.splice(position-1,1);
@@ -29,4 +35,6 @@ const chainMaker = {
   }
 };
 
-module.exports = chainMaker;
+module.exports = {
+  chainMaker
+};
